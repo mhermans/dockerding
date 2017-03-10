@@ -12,15 +12,23 @@ RUN apt-get update \
      libgeos-dev \
      libmagick++-dev \
      libpoppler-cpp-dev \
+
+     # required for tmap -> V8Z
+     libv8-3.14-dev \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/ \
   && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
 
 RUN install2.r --error --deps TRUE \
+    ggrepel \
+    directlabels \
+    wesanderson \
+    countrycode \
     ggthemes \
     openxlsx \
     futile.logger \
     fst \
+    tmap \
     &&  rm -rf /tmp/downloaded_packages/
 
 #RUN installGithub.r \

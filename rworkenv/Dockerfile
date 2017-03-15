@@ -20,6 +20,7 @@ RUN apt-get update \
   && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
 
 RUN install2.r --error --deps TRUE \
+    rgdal \
     ggrepel \
     directlabels \
     wesanderson \

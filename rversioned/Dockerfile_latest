@@ -1,0 +1,81 @@
+# ############################################################# #
+# Fully versioned R container with Rstudio + tidyverse packages #
+# ############################################################# #
+
+# Start from versioned Rocker image with R at a specific version, plus Rstudio
+#
+# 0.0.1
+
+FROM rocker/rstudio:3.4.1
+
+MAINTAINER "Maarten Hermans" maarten@mhermans.net
+
+# Specify exact versions for required libraries using apt-get
+RUN apt-get update -qq && apt-get -y --no-install-recommends install \
+     libimage-exiftool-perl=10.40-1 \
+     libmagick++-dev=8:6.9.7.4+dfsg-11 \
+
+     # tmap: proj, gdal, geos 
+     libproj-dev=4.9.3-1 \
+     libgdal-dev=2.1.2+dfsg-5 \
+     libgeos-dev=3.5.1-3 \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/ \
+  && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
+
+
+# install the versions library, that can install specific versions of packages
+# using the MRAN service https://mran.microsoft.com/
+RUN R -e "install.packages(c('versions'))"
+
+# Install additional R-libraries using the versions library
+# (multiple lines for convenience)
+
+# core versioned tidyverse packages https://github.com/tidyverse/tidyverse
+RUN R -e "library(versions); install.versions('ggplot2', '2.2.1')"
+RUN R -e "library(versions); install.versions('dplyr', '0.7.1')"
+RUN R -e "library(versions); install.versions('tidyr', '0.6.3')"
+RUN R -e "library(versions); install.versions('readr', '1.1.1')"
+RUN R -e "library(versions); install.versions('purrr', '0.2.2.2')"
+RUN R -e "library(versions); install.versions('tibble', '1.3.3')"
+
+# Additional versioned tidyverse packages
+RUN R -e "library(versions); install.versions('hms', '0.3')"
+RUN R -e "library(versions); install.versions('stringr', '1.2.0')"
+RUN R -e "library(versions); install.versions('lubridate', '1.6.0')"
+RUN R -e "library(versions); install.versions('forcats', '0.2.0')"
+RUN R -e "library(versions); install.versions('feather', '0.3.1')"
+RUN R -e "library(versions); install.versions('haven', '1.1.0')"
+RUN R -e "library(versions); install.versions('httr', '1.2.1')"
+RUN R -e "library(versions); install.versions('jsonlite', '1.5')"
+RUN R -e "library(versions); install.versions('readxl', '1.0.0')"
+RUN R -e "library(versions); install.versions('rvest', '0.3.2')"
+RUN R -e "library(versions); install.versions('xml2', '1.1.1')"
+RUN R -e "library(versions); install.versions('modelr', '0.1.0')"
+RUN R -e "library(versions); install.versions('broom', '0.4.2')"
+
+# Commonly used additional packages
+RUN R -e "library(versions); install.versions('assertr', '2.0.2.2')"
+RUN R -e "library(versions); install.versions('ggrepel', '0.6.5')"
+RUN R -e "library(versions); install.versions('tmap', '1.6')"
+RUN R -e "library(versions); install.versions('likert', '1.3.5')"
+RUN R -e "library(versions); install.versions('directlabels', '2017.03.31')"
+RUN R -e "library(versions); install.versions('countrycode', '0.19')"
+RUN R -e "library(versions); install.versions('survey', '3.32-1')"
+RUN R -e "library(versions); install.versions('openxlsx', '4.0.17')"
+RUN R -e "library(versions); install.versions('ggthemes', '3.4.0')"
+RUN R -e "library(versions); install.versions('futile.logger', '1.4.3')"
+RUN R -e "library(versions); install.versions('fst', '0.7.2')"
+
+# Define enviroment vars through included dotfiles
+COPY .Renviron /home/rstudio/.Renviron
+COPY .gitconfig /home/rstudio/.gitconfig
+
+# Set the home directory to the rstudio default user ('rstudio'/'rstudio' login)
+WORKDIR /home/rstudio/
+
+# build docker image:
+# docker build -t mhermans/rversioned:0.0.1 --file Dockerfile .
+
+# run docker image (localhost:8787):
+# docker run -d -v $HOME/var/data:/home/rstudio/data -p 8787:8787 mhermans/rversioned

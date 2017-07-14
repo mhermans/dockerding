@@ -30,6 +30,8 @@ RUN R -e "install.packages(c('versions'))"
 # (multiple lines for convenience)
 RUN R -e "library(versions); install.versions(c('ggrepel', 'tmap', 'likert', 'directlabels', 'countrycode'), c('0.6.5', '1.6', '1.3.5', '2017.03.31', '0.19'))"
 RUN R -e "library(versions); install.versions(c('survey', 'openxlsx', 'ggthemes', 'futile.logger', 'fst'), c('3.31-5', '4.0.17', '3.4.0', '1.4.3', '0.7.2'))"
+RUN R -e "library(versions); install.versions(c('assertr', 'lavaan', 'GPArotation', 'coefplot'), c('2.0.2', '0.5-23.1097', '2014.11-1', '1.2.4'))"
+RUN R -e "library(versions); install.versions(c('vcd', 'vcdExtra'), c('1.4-3', '0.7-0'))"
 
 # Define enviroment vars through included dotfiles
 COPY .Renviron /home/rstudio/.Renviron

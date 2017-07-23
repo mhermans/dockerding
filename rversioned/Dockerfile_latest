@@ -13,7 +13,7 @@ MAINTAINER "Maarten Hermans" maarten@mhermans.net
 # Specify exact versions for required libraries using apt-get
 RUN apt-get update -qq && apt-get -y --no-install-recommends install \
      libimage-exiftool-perl=10.40-1 \
-     libmagick++-dev=8:6.9.7.4+dfsg-11 \
+     libmagick++-dev=8:6.9.7.4+dfsg-11+deb9u1 \
 
      # tmap: proj, gdal, geos 
      libudunits2-dev=2.2.20-1+b1 \
@@ -35,7 +35,7 @@ RUN R -e "install.packages(c('versions'))"
 # Install tidyverse packages https://github.com/tidyverse/tidyverse
 RUN R -e "library(versions); \
           install.versions('ggplot2', '2.2.1'); \
-          install.versions('dplyr', '0.7.1'); \
+          install.versions('dplyr', '0.7.0'); \
           install.versions('tidyr', '0.6.3'); \
           install.versions('readr', '1.1.1'); \
           install.versions('purrr', '0.2.2.2'); \

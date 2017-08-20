@@ -2,7 +2,8 @@
 
 * Rstudio does not keep track of projects (open project)
 * Git push/pull ok over HTTP, maar geen SSH?
-
+* Docker images starten zonder internetverbinding: 
+    docker: Error response from daemon: open /etc/resolv.conf: no such file or directory.   
 # Docker setup
 
 In folder wiht `Dockerfile`:

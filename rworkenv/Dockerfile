@@ -12,6 +12,8 @@ RUN apt-get update \
      libgeos-dev \
      libmagick++-dev \
      libpoppler-cpp-dev \
+     libudunits2-dev \
+     #udunits2 \
 
      # required for tmap -> V8Z
      libv8-3.14-dev \
@@ -29,7 +31,7 @@ RUN install2.r --error --deps TRUE \
     openxlsx \
     futile.logger \
     fst \
-    tmap \
+    #tmap \
     &&  rm -rf /tmp/downloaded_packages/
 
 #RUN installGithub.r \

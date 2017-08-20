@@ -1,3 +1,9 @@
+# Versioned and mostly modularized R environments
+
+- **mhermans/rversioned**: base image with R, tidyverse and common R packages versioned
+- **mhermans/rspatial**: base image + geo/gis R-packages & required libraries such as GDAL
+- **mhermans/rnetwork**: base image + R network analysis libraries (+ bindings to mapequation)
+
 # Docker/Rstudio combo issues
 
 * Rstudio does not keep track of projects (open project)
@@ -8,7 +14,7 @@
 
 In folder wiht `Dockerfile`:
 
-    docker build -t mhermans/rgistest .
+    docker build -t mhermans/rgistest:1.0.1 --file Dockerfile .
 
 List available images
 
@@ -54,9 +60,20 @@ Delete orphaned volumes
 	
 	docker volume rm $(docker volume ls -qf dangling=true)
 
+Docker disk usage
+
+    docker system df
+
+Clean everything
+
+    docker system prune
+
+... or individual aspects
+
+    docker images prune
+
 	
 # R docker envirnonment
 
-futile-logger
 
 docker run --rm -ti -d -p 8787:8787 -v $HOME/var/data:/home/rstudio/data -v $HOME/projects/:/home/rstudio/projects/ rocker/rstudio

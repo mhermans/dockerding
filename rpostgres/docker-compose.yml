@@ -1,0 +1,20 @@
+version: '2.0'
+
+services:
+    rstudio:
+        image: mhermans/rversioned:0.0.2
+        ports:
+            - "8787:8787"
+        volumes:
+            - /home/mhermans/projects/:/home/rstudio/projects/
+            - /home/mhermans/var/data/:/home/rstudio/var/data
+    db:
+        image: postgres
+        volumes:
+            - /home/mhermans/var/postgresql:/var/lib/postgresql
+        ports:
+            - "5432:5432"
+        environment:
+            PGDATA: /var/lib/postgresql/data
+            POSTGRES_USER: mhermans
+            POSTGRES_PASSWORD: temppwd

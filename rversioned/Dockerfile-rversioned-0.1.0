@@ -77,7 +77,12 @@ RUN R -e "library(versions); \
           install.versions('ggalt', '0.4.0'); \
           install.versions('fst', '0.7.2'); \
           install.versions('cowplot', '0.8.0'); \
+          install.versions('ggridges', '0.4.1'); \
+          install.versions('srvyr', '0.2.2'); \
           install.versions('tmap', '1.10')"
+
+# quid versioned libraries not on CRAN?
+# install.packages("BelgiumMaps.StatBel", repos = "http://www.datatailor.be/rcube", type = "source")
 
 # Define enviroment vars through included dotfiles
 COPY .Renviron /home/rstudio/.Renviron

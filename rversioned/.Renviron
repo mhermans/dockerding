@@ -1,2 +1,3 @@
 DATADIR_HIVA_LOCAL=~/var/data/datadir_hiva
 PROJECTDIR_PERSONAL = ~/projects
+PROJECTDIR_WORK = ~/projects

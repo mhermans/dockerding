@@ -1,0 +1,31 @@
+# ########################################### #
+# Versioned R Dockerfile for network analyses #
+# ########################################### #
+
+# 0.0.1
+
+# Start from rversioned Dockerfile
+FROM mhermans/rversioned:0.1.1
+
+MAINTAINER "Maarten Hermans" maarten@mhermans.net
+
+# install the versions library, that can install specific versions of packages
+# using the MRAN service https://mran.microsoft.com/
+RUN R -e "install.packages(c('versions'))"
+
+# Install additional R-libraries using the versions library
+
+# Commonly used additional packages
+RUN R -e "library(versions); \
+          #install.versions('ggalt', '0.4.0'); \
+          install.versions('igraph', '1.11-1')"
+
+# quid versioning packages outside of CRAN?
+#RUN R -e "install.packages('BelgiumMaps.StatBel', repos = 'http://www.datatailor.be/rcube', type = 'source')
+
+# Define enviroment vars through included dotfiles
+COPY .Renviron /home/rstudio/.Renviron
+COPY .gitconfig /home/rstudio/.gitconfig
+
+# Set the home directory to the rstudio default user ('rstudio'/'rstudio' login)
+WORKDIR /home/rstudio/

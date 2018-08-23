@@ -3,6 +3,12 @@
 - **mhermans/rversioned**: base image with R, tidyverse and common R packages versioned
 - **mhermans/rspatial**: base image + geo/gis R-packages & required libraries such as GDAL
 - **mhermans/rnetwork**: base image + R network analysis libraries (+ bindings to mapequation)
+- **mhermans/rstats**: base image + various regression, modeling, stats packages
+
+
+quid R + Python + reticulate + Jupyter + Rstudio image?
+
+quid blogdown docker image met packages om posts steeds hetzelfde te hergenereren?
 
 # Docker/Rstudio combo issues
 

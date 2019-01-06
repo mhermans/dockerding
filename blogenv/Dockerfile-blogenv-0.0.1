@@ -1,0 +1,57 @@
+# ############################################################# #
+# Blogdown blog environment ontop of rversioned Docker image    # 
+# ############################################################# #
+
+# 0.0.1
+# start from mhermans:rversioned:0.1.2; Hugo 0.53
+#
+#
+
+FROM mhermans/rversioned:0.1.2
+
+MAINTAINER "Maarten Hermans" maarten@mhermans.net
+
+# Specify exact versions for required libraries using apt-get
+RUN apt-get update -qq && apt-get -y --no-install-recommends install \
+     libimage-exiftool-perl=10.40-1 \
+     #libmagick++-dev=8:6.9.7.4+dfsg-11+deb9u4 \
+    
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/ \
+  && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
+
+
+# install the versions library, that can install specific versions of packages
+# using the MRAN service https://mran.microsoft.com/
+RUN R -e "install.packages(c('versions'))"
+
+# Install additional R-libraries using the versions library
+
+RUN R -e "library(versions); \
+          install.versions('leaflet', '2.0.2'); \
+          install.versions('blogdown', '0.9'); \
+          install.versions('widgetframe', '0.3.1'); \
+          install.versions('exifr', '0.3.0')"
+
+# config
+ENV HUGO_VERSION=0.53
+#ENV HUGO_TYPE=
+ENV HUGO_TYPE=_extended
+
+ENV HUGO_ID=hugo${HUGO_TYPE}_${HUGO_VERSION}
+ADD https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/${HUGO_ID}_Linux-64bit.tar.gz /tmp
+RUN tar -xf /tmp/${HUGO_ID}_Linux-64bit.tar.gz -C /tmp \
+    && mkdir -p /usr/local/sbin \
+    && mv /tmp/hugo /usr/local/sbin/hugo \
+    && rm -rf /tmp/${HUGO_ID}_linux_amd64 \
+    && rm -rf /tmp/${HUGO_ID}_Linux-64bit.tar.gz \
+    && rm -rf /tmp/LICENSE.md \
+    && rm -rf /tmp/README.md
+
+
+# Define enviroment vars through included dotfiles
+COPY .Renviron /home/rstudio/.Renviron
+COPY .gitconfig /home/rstudio/.gitconfig
+
+# Set the home directory to the rstudio default user ('rstudio'/'rstudio' login)
+WORKDIR /home/rstudio/

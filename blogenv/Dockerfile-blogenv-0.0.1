@@ -14,7 +14,7 @@ MAINTAINER "Maarten Hermans" maarten@mhermans.net
 # Specify exact versions for required libraries using apt-get
 RUN apt-get update -qq && apt-get -y --no-install-recommends install \
      libimage-exiftool-perl=10.40-1 \
-     #libmagick++-dev=8:6.9.7.4+dfsg-11+deb9u4 \
+     libmagick++-dev=8:6.9.7.4+dfsg-11+deb9u4 \
     
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/ \
@@ -29,8 +29,10 @@ RUN R -e "install.packages(c('versions'))"
 
 RUN R -e "library(versions); \
           install.versions('leaflet', '2.0.2'); \
+          install.versions('osmdata', '0.0.9'); \
           install.versions('blogdown', '0.9'); \
           install.versions('widgetframe', '0.3.1'); \
+          install.versions('magick', '2.0'); \
           install.versions('exifr', '0.3.0')"
 
 # config

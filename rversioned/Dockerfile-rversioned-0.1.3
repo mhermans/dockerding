@@ -13,7 +13,7 @@
 # + caTools om notebooks in Rstudio te compilen
 # + explicit leaflet 2.0.2
 # + explicit sf 0.7-2
-# - exiftool -> naar blogenv
+# - exiftool, magik -> naar blogenv
 #
 # 0.1.2
 # R version from 3.5.0 to 3.5.1 
@@ -32,7 +32,7 @@ MAINTAINER "Maarten Hermans" maarten@mhermans.net
 # Specify exact versions for required libraries using apt-get
 RUN apt-get update -qq && apt-get -y --no-install-recommends install \
      #libimage-exiftool-perl=10.40-1 \
-     libmagick++-dev=8:6.9.7.4+dfsg-11+deb9u6 \
+     #libmagick++-dev=8:6.9.7.4+dfsg-11+deb9u6 \
     
      # JSON processor, for package jqr (used by?)
      libjq-dev=1.5+dfsg-1.3 \ 

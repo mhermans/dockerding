@@ -78,7 +78,10 @@ RUN install2.r --error \
     --deps TRUE \
     gganimate \
     redux \
-    storr
+    storr \
+    lavaan \
+    flextable \
+    officer
 
 
 # Define enviroment vars through included dotfiles

@@ -22,6 +22,7 @@ In folder wiht `Dockerfile`:
 
     docker build -t mhermans/rgistest:1.0.1 --file Dockerfile .
     docker build -t mhermans/rversioned:0.1.1 --file Dockerfile-rversioned-0.1.1 .
+    docker build -t mhermans/rlatest --no-cache --file Dockerfile . 2>&1 | tee log.txt 
 
 List available images
 

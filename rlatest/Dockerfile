@@ -81,7 +81,8 @@ RUN install2.r --error \
     storr \
     lavaan \
     flextable \
-    officer
+    officer \
+    binsmooth
 
 
 # Define enviroment vars through included dotfiles

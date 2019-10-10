@@ -22,6 +22,9 @@ RUN apt-get update -qq && apt-get -y --no-install-recommends install \
      # redis / redux / storr
      libhiredis-dev \
 
+     # voor rgl ?
+     libglu1-mesa-dev \
+     #mesa-common-dev \
 
      # tmap: proj, gdal, geos 
      libudunits2-dev \
@@ -57,7 +60,10 @@ RUN install2.r --error \
     MplusAutomation \
     openxlsx \
     fst \
-    feather
+    feather \
+    arrow
+
+#TODO: drop arrow for feather after switch most projects
 
 # quid versioning packages outside of CRAN?
 RUN R -e "install.packages('BelgiumMaps.StatBel', repos = 'http://www.datatailor.be/rcube', type = 'source')"
@@ -82,7 +88,10 @@ RUN install2.r --error \
     lavaan \
     flextable \
     officer \
-    binsmooth
+    binsmooth \
+    ggeffects \
+    vcd \
+    vcdExtra
 
 
 # Define enviroment vars through included dotfiles

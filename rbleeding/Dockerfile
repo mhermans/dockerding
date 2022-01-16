@@ -12,6 +12,9 @@ RUN apt-get update -qq && apt-get -y --no-install-recommends install \
     cargo \
     libavfilter-dev \
 
+     # voor pdftools
+     libpoppler-cpp-dev \
+
      # JSON processor, for package jqr (used by spatial packages)
      libjq-dev \ 
      protobuf-compiler \
@@ -32,6 +35,9 @@ RUN apt-get update -qq && apt-get -y --no-install-recommends install \
      libproj-dev \
      libgdal-dev \
      libgeos-dev \
+
+     #chromium needed for gtsave() via webshot2
+     chromium-browser \
 
      #fonts
      fonts-roboto-fontface \
@@ -86,13 +92,15 @@ RUN install2.r --error \
 #RUN R -e "remotes::install_github('rstudio/gt')"
 RUN R -e "remotes::install_github('davidgohel/officedown')"
 
+RUN R -e "remotes::install_github('rstudio/webshot2')"
+
 
 RUN install2.r --error \
     --deps TRUE \
     gganimate \
     gghighlight \
     ggtext \
-    sjPlot \
+    #sjPlot \ # # importeert rstanarm?
     redux \
     storr \
     lavaan \
@@ -101,7 +109,7 @@ RUN install2.r --error \
     officer \
     officedown \
     #binsmooth \
-    ggeffects \
+    ggeffects \ 
     labelled \
     vcd \
     vcdExtra \

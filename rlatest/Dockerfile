@@ -83,6 +83,7 @@ RUN R -e "remotes::install_github('rstudio/gt')"
 RUN install2.r --error \
     --deps TRUE \
     gganimate \
+    gghighlight \
     redux \
     storr \
     lavaan \

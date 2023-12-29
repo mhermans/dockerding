@@ -1,4 +1,5 @@
 DATADIR_HIVA_LOCAL = /mnt/datapartition/var/data/datadir_hiva
+DATADIR = /mnt/datapartition/var/data/datadir_hiva
 PROJECTDIR_PERSONAL = ~/projects
 PROJECTDIR_WORK = ~/projects
 DROPBOX_FOLDER = /mnt/datapartition/Dropbox/ 

@@ -1,3 +1,13 @@
+# TODO
+
+* [ ] bekijk werking `renv`, misschien betere oplossing om per project versioned R-libraries te bepalen?
+* [ ] maak een aparte image met de system libraries, waar R-images op gebaseerd worden, met system libraries versioned en niet-versioned.
+* [ ] maak een versioned versie aan, met ook de system libraries versioned
+* [ ] na opkuist van rbleeding en rversioned, push naar docker hub
+* [ ] probeer op Diskstation image via docker hub op te starten
+
+
+
 # Versioned and mostly modularized R environments
 
 - **mhermans/rversioned**: base image with R, tidyverse and common R packages versioned
@@ -16,6 +26,7 @@ quid blogdown docker image met packages om posts steeds hetzelfde te hergenerere
 * Git push/pull ok over HTTP, maar geen SSH?
 * Docker images starten zonder internetverbinding: 
     docker: Error response from daemon: open /etc/resolv.conf: no such file or directory.   
+
 # Docker setup
 
 In folder wiht `Dockerfile`:
@@ -49,10 +60,6 @@ Stop container
 
     docker stop container_id 
 
-mercurial
-hg clone https://bitbucket.org/mapequation/infomap
-make
-
 login to Dockerhub
 
 docker login --username=yourhubusername --password=yourpassword --email=youremail@company.com
@@ -85,3 +92,11 @@ Clean everything
 
 
 docker run --rm -ti -d -p 8787:8787 -v $HOME/var/data:/home/rstudio/data -v $HOME/projects/:/home/rstudio/projects/ rocker/rstudio
+
+
+Docker run flags
+
+    -d daemon mode
+    -e environment variable. Voor Rstudie: PASSWORD=XXX ROOT=true
+    -v map volumes external_path:internal_path
+    -p map port external_port:internal_port

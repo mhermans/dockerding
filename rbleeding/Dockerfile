@@ -2,9 +2,9 @@
 # Most recent stack R + Rstudio + libs + packages               #
 # ############################################################# #
 
-#FROM rocker/verse:latest
+FROM rocker/verse:latest
 #FROM rocker/tidyverse:4.2.1
-FROM rocker/tidyverse:4.2.1
+#FROM rocker/tidyverse:4.2.1
 
 MAINTAINER "Maarten Hermans" maarten@mhermans.net
 
